@@ -19,8 +19,8 @@ public class JPhoton {
     	Canvas canvas = new Canvas(800, 600);
     	Camera cam = new PerspectiveCamera(45.0f*3.1415f/180.0f, 1.f, new Vector2f(800, 600));
     	//cam.lookAt(new Vector3f(0), new Vector3f(0, 0, -10), new Vector3f(0, 1, 0));
-    	
-    	tri = new Triangle(new Vector3f(-2, -2, 5), new Vector3f(2, -2, 5), new Vector3f(0,  2, 5));
+        //
+    	tri = new Triangle(new Vector3f(-2, -2, -5), new Vector3f(2, -2, -5), new Vector3f(0,  2, -5));
     	Ray rr = cam.shootRay(400, 300);
     	System.out.println(tri.intersect(rr));
     	
