@@ -1,5 +1,7 @@
 package core;
 
+import math.Vector3f;
+
 public class Ray {
 	public Vector3f origin;
 	public Vector3f dir;

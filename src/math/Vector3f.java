@@ -1,4 +1,4 @@
-package core;
+package math;
 
 public final class Vector3f {
 	public final float x, y, z;

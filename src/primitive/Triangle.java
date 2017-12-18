@@ -2,7 +2,7 @@ package primitive;
 
 import core.Intersection;
 import core.Ray;
-import core.Vector3f;
+import math.Vector3f;
 
 public class Triangle extends Entity {
     public Vector3f v0;   

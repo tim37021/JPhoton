@@ -6,6 +6,8 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
+import math.Vector3f;
+
 // THIS CLASS MUST BE EXTERNALLY SYNCED
 
 public class Canvas {

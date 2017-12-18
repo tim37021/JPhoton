@@ -1,5 +1,7 @@
 package core;
 
+import math.Vector3f;
+
 public final class Intersection {
 	public Vector3f point;
 	public Vector3f normal;
