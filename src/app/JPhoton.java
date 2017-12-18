@@ -2,8 +2,7 @@ package app;
 
 import camera.*;
 import core.*;
-import math.Vector2f;
-import math.Vector3f;
+import math.*;
 import primitive.*;
 
 public class JPhoton {

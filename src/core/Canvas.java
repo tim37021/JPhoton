@@ -3,10 +3,9 @@ package core;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.io.File;
-
 import javax.imageio.ImageIO;
 
-import math.Vector3f;
+import math.*;
 
 // THIS CLASS MUST BE EXTERNALLY SYNCED
 

@@ -1,8 +1,7 @@
 package camera;
 
-import core.Ray;
-import math.Vector2f;
-import math.Vector3f;
+import core.*;
+import math.*;
 
 public abstract class Camera {
 	protected Vector2f opticalCenter;

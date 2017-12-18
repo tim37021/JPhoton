@@ -1,6 +1,6 @@
 package core;
 
-import math.Vector3f;
+import math.*;
 
 public final class Transformation {
 	public Vector3f translate;
