@@ -29,8 +29,8 @@ public class Triangle extends Entity {
         if(Math.abs(nDotDir) < almostZero)
             return null;
 
-        float d = N.dot(v0);
-        float t = (N.dot(r.origin) + d) / nDotDir;
+        float d = -N.dot(v0);
+        float t = -(N.dot(r.origin) + d) / nDotDir;
 
         if(t < 0.0)
             return null;
