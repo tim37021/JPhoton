@@ -3,6 +3,13 @@ package math;
 public final class Vector3f {
 	public final float x, y, z;
 	
+	
+	public Vector3f(float o) {
+		this.x = o;
+		this.y = o;
+		this.z = o;
+	}
+	
 	public Vector3f(float x, float y, float z) {
 		this.x = x;
 		this.y = y;
@@ -63,5 +70,11 @@ public final class Vector3f {
 	@Override
 	public Object clone() {
 		return new Vector3f(this);
+	}
+	
+	
+	@Override
+	public String toString() {
+		return new String("("+x+", "+y+", "+z+")");
 	}
 }

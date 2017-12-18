@@ -45,8 +45,8 @@ public class PerspectiveCamera extends Camera {
 	public void lookAt(Vector3f origin, Vector3f center, Vector3f up) {
 		// TODO Auto-generated method stub
 		position = origin;
-		this.front = center.sub(origin);
-		this.right = front.crossProduct(up);
+		this.front = center.sub(origin).normalized();
+		this.right = front.crossProduct(up.normalized());
 		this.up = right.crossProduct(this.front);
 		updateCachedVariables();
 	}

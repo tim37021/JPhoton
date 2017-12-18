@@ -1,6 +1,6 @@
 package core;
 
-import math.Vector3f;
+import math.*;
 
 public abstract class BRDF {
 	public abstract Vector3f calc(Ray in, Ray out);

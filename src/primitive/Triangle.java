@@ -18,18 +18,19 @@ public class Triangle extends Entity {
 
 	@Override
 	public Intersection intersect(Ray r) {
-        Vector3f v0v1 = v0.sub(v1);
-        Vector3f v0v2 = v0.sub(v2);
+        Vector3f v0v1 = v1.sub(v0);
+        Vector3f v0v2 = v2.sub(v0);
 
         Vector3f N = v0v1.crossProduct(v0v2);
-    
+
         // The ray and plane are parallel or not
         float almostZero = 0.0f; // TODO: to be set 
-        if(Math.abs(N.dot(r.dir)) < almostZero)
+        float nDotDir = N.dot(r.dir);
+        if(Math.abs(nDotDir) < almostZero)
             return null;
 
         float d = N.dot(v0);
-        float t = (N.dot(r.origin) + d);
+        float t = (N.dot(r.origin) + d) / nDotDir;
 
         if(t < 0.0)
             return null;
@@ -63,8 +64,8 @@ public class Triangle extends Entity {
 
         if(N.dot(C) < 0)
             return null;
-
-        return new Intersection(P, N);
+        
+        return new Intersection(P, N.normalized());
 
 	}
 

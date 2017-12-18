@@ -1,6 +1,6 @@
 package core;
 
-import math.Vector3f;
+import math.*;
 
 public class Ray {
 	public Vector3f origin;
@@ -9,5 +9,10 @@ public class Ray {
 	public Ray(Vector3f origin, Vector3f dir) {
 		this.origin = origin;
 		this.dir = dir;
+	}
+	
+	@Override
+	public String toString() {
+		return new String("Origin: " + origin + ", Direction:" + dir);
 	}
 }

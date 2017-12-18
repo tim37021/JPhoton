@@ -22,6 +22,7 @@ public class Canvas {
 	}
 	
 	public void setPixel(int x, int y, Vector3f color) {
+		color = MathUtils.clamp(color, 0.0f, 1.0f);
 		int c = (255<<24) + (((int)(color.x*255))<<16) + (((int)(color.y*255))<<8) + ((int)(color.z*255));
 		this.color[y*width+x] = c;
 	}

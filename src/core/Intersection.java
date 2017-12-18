@@ -10,5 +10,10 @@ public final class Intersection {
 		this.point = point;
 		this.normal = normal;
 	}
+	
+	@Override
+	public String toString() {
+		return new String("Point:"+point+", Normal:"+normal);
+	}
 
 }
