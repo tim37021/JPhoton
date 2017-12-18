@@ -35,6 +35,12 @@ public final class Vector3f {
 		return x*v.x+y*v.y+z*v.z;
 	}
 	
+	public Vector3f crossProduct(Vector3f v) {
+        return new Vector3f(y*v.z - z*v.y,
+                            z*v.x - x*v.z,
+                            x*v.y - y*v.x);
+    }
+	
 	public Vector3f normalized() {
 		float l = (float)Math.sqrt(length2());
 		return new Vector3f(x/l, y/l, z/l);
