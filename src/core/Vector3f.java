@@ -26,6 +26,10 @@ public final class Vector3f {
 	public Vector3f mul(Vector3f v) {
 		return new Vector3f(x*v.x, y*v.y, z*v.z);
 	}
+
+	public Vector3f mul(float scale) {
+		return new Vector3f(x*scale, y*scale, z*scale);
+	}
 	
 	public float length2() {
 		return x*x+y*y+z*z;
