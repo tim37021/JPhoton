@@ -24,7 +24,7 @@ public class PerspectiveCamera extends Camera {
 		this.fov = fov;
 		this.aspect = extent.x/extent.y;
 		this.near = near;
-		lookAt(new Vector3f(0, 0, 0), new Vector3f(0, 0, -1), new Vector3f(0, 1, 0));
+		lookAt(new Vector3f(0, 0, 0), new Vector3f(0, 0, 1), new Vector3f(0, 1, 0));
 	}
 	
 	
