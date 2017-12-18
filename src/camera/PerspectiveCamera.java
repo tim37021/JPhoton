@@ -36,8 +36,8 @@ public class PerspectiveCamera extends Camera {
 	public Ray shootRay(int x, int y) {
 		// first we calculate optical center in world space
 		Vector2f dxAndDy = (new Vector2f(x, y)).sub(opticalCenter);
-		// right * dx + up * -dy
-		Vector3f imagePoint = right.mul(dxAndDy.x).add(up.mul(-dxAndDy.y));
+		// (right * dx * pixelWidth.x + up * -dy * pixelWidth.y) + opticalCenter3d
+		Vector3f imagePoint = opticalCenter3d.add(right.mul(dxAndDy.x*pixelWidth.x).add(up.mul(-dxAndDy.y*pixelWidth.y)));
 		
 		Vector3f dir = imagePoint.sub(position);
 		return new Ray(imagePoint, dir.normalized());
