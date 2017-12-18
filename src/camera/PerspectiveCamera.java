@@ -8,7 +8,6 @@ public class PerspectiveCamera extends Camera {
 	public float fov;
 	public float aspect;
 	public float near;
-	public float far;
 	
 	public Vector3f front;
 	public Vector3f up;
@@ -19,14 +18,13 @@ public class PerspectiveCamera extends Camera {
 	private Vector2f pixelWidth;
 	//////////////////
 	
-	public PerspectiveCamera(float fov, float aspect, float near, float far, Vector2f extent) {
+	public PerspectiveCamera(float fov, float near, Vector2f extent) {
 		super(extent);
 		// look at +z axis at origin
 		
 		this.fov = fov;
-		this.aspect = aspect;
+		this.aspect = extent.x/extent.y;
 		this.near = near;
-		this.far = far;
 		lookAt(new Vector3f(0, 0, 0), new Vector3f(0, 0, 1), new Vector3f(0, 1, 0));
 	}
 	
