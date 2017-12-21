@@ -14,7 +14,7 @@ public class PerspectiveCamera extends Camera {
 	
 	// cached variable
 	private Vector3f opticalCenter3d;
-	private Vector2f pixelWidth;
+	private float pixelWidth;
 	//////////////////
 	
 	public PerspectiveCamera(float fov, float near, Vector2f extent) {
@@ -34,7 +34,7 @@ public class PerspectiveCamera extends Camera {
 		// first we calculate optical center in world space
 		Vector2f dxAndDy = (new Vector2f(x, y)).sub(opticalCenter);
 		// (right * dx * pixelWidth.x + up * -dy * pixelWidth.y) + opticalCenter3d
-		Vector3f imagePoint = opticalCenter3d.add(right.mul(dxAndDy.x*pixelWidth.x).add(up.mul(-dxAndDy.y*pixelWidth.y)));
+		Vector3f imagePoint = opticalCenter3d.add(right.mul(dxAndDy.x*pixelWidth).add(up.mul(-dxAndDy.y*pixelWidth)));
 		
 		Vector3f dir = imagePoint.sub(position);
 		return new Ray(imagePoint, dir.normalized());
@@ -55,8 +55,7 @@ public class PerspectiveCamera extends Camera {
 		Vector3f nf = front.mul(near);
 		opticalCenter3d = position.add(nf);
 		
-		float ratio = 2 * near * (float)Math.tan(fov/2) / extent.y;
-		pixelWidth = new Vector2f(ratio*aspect, ratio);
+		pixelWidth = 2 * near * (float)Math.tan(fov/2) / extent.y;
 	}
 
 }
