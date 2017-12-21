@@ -65,7 +65,9 @@ public class Triangle extends Entity {
         if(N.dot(C) < 0)
             return null;
         
-        return new Intersection(P, N.normalized());
+        // normal vector shold reverse to ray direction
+        Vector3f rN = N.dot(r.dir) < 0 ? N : new Vector3f(-N.x ,-N.y, -N.z);
+        return new Intersection(P, rN.normalized());
 
 	}
 
