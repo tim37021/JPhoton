@@ -1,8 +1,15 @@
 package math;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public final class Vector3f {
 	public final float x, y, z;
 	
+	private static Pattern regex;
+	static {
+		regex = Pattern.compile("\\(([+-]?[0-9]*[.]?[0-9]+) ([+-]?[0-9]*[.]?[0-9]+) ([+-]?[0-9]*[.]?[0-9]+)\\)");
+	}
 	
 	public Vector3f(float o) {
 		this.x = o;
@@ -76,5 +83,17 @@ public final class Vector3f {
 	@Override
 	public String toString() {
 		return new String("("+x+", "+y+", "+z+")");
+	}
+	
+	public static Vector3f parse(String str) {
+		Matcher m = regex.matcher(str);
+		if(m.find()) {
+			float x = Float.parseFloat(m.group(1));
+			float y = Float.parseFloat(m.group(2));
+			float z = Float.parseFloat(m.group(3));
+			
+			return new Vector3f(x, y, z);
+		}
+		return null;
 	}
 }

@@ -10,7 +10,7 @@ public class JPhoton {
 	static private Vector3f radiance(Ray r) {
 		Intersection itsec = tri.intersect(r);
 		if(itsec != null)
-			return itsec.point;
+			return itsec.normal;
 		else
 			return new Vector3f(0.0f);
 	}

@@ -1,7 +1,11 @@
 package camera;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import core.*;
 import math.*;
+import primitive.Sphere;
 
 public class PerspectiveCamera extends Camera {
 	public float fov;
@@ -16,6 +20,13 @@ public class PerspectiveCamera extends Camera {
 	private Vector3f opticalCenter3d;
 	private float pixelWidth;
 	//////////////////
+	
+	static Pattern regex;
+	static {
+	
+		regex = Pattern.compile("([+-]?[0-9]*[.]?[0-9]+) ([+-]?[0-9]*[.]?[0-9]+) \\(([+-]?[0-9]*[.]?[0-9]+) ([+-]?[0-9]*[.]?[0-9]+)\\)");
+	}
+	
 	
 	public PerspectiveCamera(float fov, float near, Vector2f extent) {
 		super(extent);
@@ -56,6 +67,21 @@ public class PerspectiveCamera extends Camera {
 		opticalCenter3d = position.add(nf);
 		
 		pixelWidth = 2 * near * (float)Math.tan(fov/2) / extent.y;
+	}
+	
+	static public Camera create(String cmd) {
+		// fov near extent
+		Matcher m = regex.matcher(cmd);
+		if(m.find()) {
+			float fov = Float.parseFloat(m.group(1));
+			float near = Float.parseFloat(m.group(2));
+			float extent_x = Float.parseFloat(m.group(3));
+			float extent_y = Float.parseFloat(m.group(4));
+			
+			return new PerspectiveCamera(fov*(float)Math.PI/180, near, new Vector2f(extent_x, extent_y));
+			
+		}
+		return null;
 	}
 
 }

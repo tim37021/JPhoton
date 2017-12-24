@@ -1,10 +1,10 @@
 package primitive;
 
 public class EntityFactory {
-	public Entity parseCommand(String cmd) {
-		String s[] = cmd.split(" ");
-		if(s[0].equals("sphere")) {
-			return Sphere.CreateSphere(cmd);
+	static public Entity parseCommand(String cmd) {
+		String pri = cmd.split(" ")[0];
+		if(pri.equals("sphere")) {
+			return Sphere.CreateSphere(cmd.substring(7));
 		}
 		return null;
 	}
