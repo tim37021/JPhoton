@@ -11,6 +11,7 @@ import material.*;
 import primitive.*;
 import math.*;
 
+
 public class Session {
 	private HashMap<String, Canvas> canvasMap;
 	private HashMap<String, Camera> cameraMap;
@@ -101,16 +102,15 @@ public class Session {
 	
 	static public void main(String args[]) {
 		Session s = new Session();
-		s.enterCommand("spawn sphere GGININ (0 0 25) 10");
-		s.enterCommand("spawn sphere GGININDER (0 0 6) 3.5");
-		//s.enterCommand("spawn sphere GGININDER (0 0 6) 3.5");
+		s.enterCommand("spawn sphere GGININ (0 0 15) 10");
+		s.enterCommand("spawn mesh CUBE res/cubeobj.obj");
 		
 		s.enterCommand("newmat emitmat (1 1 1) lambert (1 1 1)");
 		s.enterCommand("assignmat emitmat GGININ");
 		
 		s.enterCommand("spawncam cam1 default 45 0.1 (800 600)");
-		s.enterCommand("camlookat cam1 (0 15 8) (0 0 9) (0 0 1)");
-		s.enterCommand("render result_1 cam1 pathtracing 500 (0 0) (800 600)");
+		s.enterCommand("camlookat cam1 (0 5 2) (0 0 0) (0 0 1)");
+		s.enterCommand("render result_1 cam1 pathtracing 100 (0 0) (800 600)");
 		s.enterCommand("saveto result_1 outImg/GGININ.png");
 	} 
 }

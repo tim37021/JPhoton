@@ -6,6 +6,9 @@ public class EntityFactory {
 		if(pri.equals("sphere")) {
 			return Sphere.CreateSphere(cmd.substring(7));
 		}
+		if(pri.equals("mesh")) {
+			return Mesh.createMesh(cmd.substring(5));
+		}
 		return null;
 	}
 }

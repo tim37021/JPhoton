@@ -60,6 +60,7 @@ public class PathTracing extends Algorithm {
 		
 		if(minSec != null){
 			Material mat = hitObj.getMaterial();
+
 			Ray newRay = mat.brdf.shootRay(minSec);
 			float coef = minSec.normal.dot(newRay.dir);
 			Vector3f rad = radiance(newRay, depth-1).mul(mat.brdf.calc(r, newRay)).mul(coef);

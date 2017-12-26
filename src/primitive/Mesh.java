@@ -14,10 +14,10 @@ import math.MathUtils;
 import math.Vector3f;
 
 public class Mesh extends Entity {
-    ArrayList<Vector3f> triangles;
-    ArrayList<Integer> indices;
+    Vector3f triangles[];
+    Integer indices[];
     
-	public Mesh(String name, ArrayList<Vector3f> triangles, ArrayList<Integer> indices) {
+	public Mesh(String name, Vector3f triangles[], Integer indices[]) {
 		super(name);
 		this.triangles = triangles;
 		this.indices = indices;
@@ -28,7 +28,9 @@ public class Mesh extends Entity {
     }
 	
 	// Obejct_name file_name
-	static public Mesh createMesh(String fileName) {
+	static public Mesh createMesh(String cmd) {
+		String name = cmd.split(" ")[0];
+		String fileName =cmd.substring(name.length()+1);
 	    ArrayList<Vector3f> triangles = new ArrayList<Vector3f>();
 	    ArrayList<Integer> indices = new ArrayList<Integer>();
 
@@ -52,9 +54,9 @@ public class Mesh extends Entity {
                 }else if(indicator.equals("vn")){
                     
                 }else if(indicator.equals("f")){
-                    indices.add(new Integer((words[1].split("//")[0])));
-                    indices.add(new Integer((words[2].split("//")[0])));
-                    indices.add(new Integer((words[3].split("//")[0])));
+                    indices.add(new Integer((words[1].split("//")[0])) - 1);
+                    indices.add(new Integer((words[2].split("//")[0])) - 1);
+                    indices.add(new Integer((words[3].split("//")[0])) - 1);
 
                 }
                 System.out.println(line);
@@ -70,7 +72,11 @@ public class Mesh extends Entity {
                 e.printStackTrace();
             }
         }
-        return new Mesh("TODO ",triangles, indices);
+        Vector3f gg[] = new Vector3f[triangles.size()];
+        triangles.toArray(gg);
+        Integer ggg[] = new Integer[indices.size()];
+        indices.toArray(ggg);
+        return new Mesh(name, gg, ggg);
 	
 	}
 	
@@ -79,8 +85,8 @@ public class Mesh extends Entity {
 	@Override
 	public Intersection intersect(Ray r) {
 	    Intersection inter=null;
-	    for(int i = 0 ; i < indices.size() ; i+=3){
-	        Intersection inter2 = MathUtils.triangleIntersection(triangles.get(i), triangles.get(i+1), triangles.get(i+2), r);
+	    for(int i = 0 ; i < indices.length ; i+=3){
+	        Intersection inter2 = MathUtils.triangleIntersection(triangles[indices[i]], triangles[indices[i+1]], triangles[indices[i+2]], r);
 	        if(inter==null || (inter2!=null && inter.t > inter2.t)) {
 	            inter = inter2;
 	        }
