@@ -17,7 +17,7 @@ public class Mesh extends Entity {
     private BoundingVolume bb;
     private BoundingVolume old_bb;
     
-	public Mesh(String name, Vector3f vertices[], Integer indices[], BoundingVolume bb) {
+	private Mesh(String name, Vector3f vertices[], Integer indices[], BoundingVolume bb) {
 		super(name);
 		this.vertices = vertices;
 		this.indices = indices;
