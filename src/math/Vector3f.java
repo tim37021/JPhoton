@@ -85,6 +85,14 @@ public final class Vector3f {
 		return new String("("+x+", "+y+", "+z+")");
 	}
 	
+	public boolean anyGreaterThan(float v) {
+		return x>v || y>v || z>v;
+	}
+	
+	public boolean allGreaterThan(float v) {
+		return x>v && y>v && z>v;
+	}
+	
 	public static Vector3f parse(String str) {
 		Matcher m = regex.matcher(str);
 		if(m.find()) {

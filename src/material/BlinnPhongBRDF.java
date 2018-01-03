@@ -1,31 +1,33 @@
 package material;
 
-import java.util.Random;
+import core.Intersection;
+import core.RandomRay;
+import core.Ray;
+import math.MathUtils;
+import math.Vector3f;
 
-import java.util.concurrent.ThreadLocalRandom;
+public class BlinnPhongBRDF extends BRDF {
 
-import core.*;
-import math.*;
-
-public class LambertianBRDF extends BRDF {
-	public final Vector3f color;
+	public float N;
+	public float alpha;
 	
-	public LambertianBRDF(Vector3f color) {
-		this.color = color;
+	public BlinnPhongBRDF(float N, float alpha) {
+		this.N = N;
+		this.alpha = alpha;
 	}
 	
 	@Override
 	public Vector3f calc(Ray in, Ray out, Vector3f normal) {
-		// TODO Auto-generated method stub
-		// brdf() * 1/p(out)
-		// (color / pi) * 1/(2pi)
-		// 2 * color
-		//return color.mul(MathUtils.DIV_1_PI);
-		return color.mul(MathUtils.DIV_1_PI);
+		Vector3f inv_in = in.dir.mul(-1.0f);
+		Vector3f H = inv_in.add(out.dir).normalized();
+		float normal_dot_H = normal.dot(H);
+		// ((n+2) / 2pi)*(N dot H)^alpha
+		return new Vector3f((alpha+2)*MathUtils.DIV_1_PI*0.5f*(float)Math.pow(normal_dot_H, alpha));
 	}
 
 	@Override
 	public RandomRay shootRay(Intersection insec) {
+		// cosine weight...
 		float u = MathUtils.rand.nextFloat();
 		float v = MathUtils.rand.nextFloat();
 
@@ -43,15 +45,5 @@ public class LambertianBRDF extends BRDF {
 		Ray newRay = new Ray(insec.point.add(dir.mul(MathUtils.EPSILON)), dir);
 		return new RandomRay(newRay, p);
 	}
-	
-	public static void main(String args[]) {
-		LambertianBRDF brdf = new LambertianBRDF(new Vector3f(1, 1, 1));
-		Intersection insec = new Intersection(0, new Vector3f(0.0f), new Vector3f(0, 1, 0));
-		//System.out.println(brdf.shootRay(insec));
-	}
-	
-	public static LambertianBRDF create(String cmd) {
-		Vector3f v = Vector3f.parse(cmd);
-		return new LambertianBRDF(v);
-	}
+
 }

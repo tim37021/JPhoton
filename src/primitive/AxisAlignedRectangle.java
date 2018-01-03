@@ -109,4 +109,10 @@ public class AxisAlignedRectangle extends Entity {
 		AxisAlignedRectangle rectangle = create("GG XY (-1 -1) (1 1) -5");
 		System.out.println(rectangle.intersect(new Ray(new Vector3f(0, 0, -10), new Vector3f(0, 0, 1))));
 	}
+
+	@Override
+	public void applyTransform(Transformation transform) {
+		// TODO Auto-generated method stub
+		// NOT SUPPORT
+	}
 }

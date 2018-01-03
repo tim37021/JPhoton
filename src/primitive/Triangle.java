@@ -2,6 +2,7 @@ package primitive;
 
 import core.Intersection;
 import core.Ray;
+import core.Transformation;
 import math.MathUtils;
 import math.Vector3f;
 
@@ -26,5 +27,11 @@ public class Triangle extends Entity {
         // TODO
     	return null;
     }
+
+	@Override
+	public void applyTransform(Transformation transform) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

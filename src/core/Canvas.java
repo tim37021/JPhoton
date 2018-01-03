@@ -10,9 +10,9 @@ import math.*;
 // THIS CLASS MUST BE EXTERNALLY SYNCED
 
 public class Canvas {
-	private BufferedImage bi;
-	private final int color[];
-	private final int width, height;
+	protected BufferedImage bi;
+	protected final int color[];
+	protected final int width, height;
 	public Canvas(int width, int height) {
 		this.width = width;
 		this.height = height;

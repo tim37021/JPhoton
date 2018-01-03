@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import core.Intersection;
 import core.Ray;
+import core.Transformation;
 import math.Vector3f;
 
 public class Sphere extends Entity {
@@ -70,13 +71,17 @@ public class Sphere extends Entity {
 
 		Vector3f N = P.sub(center).normalized();
         
+		if(N.dot(r.dir) > 0) {
+			System.out.println("You shoot inside the ball.");
+		}
+		
 		return new Intersection(t, P, N);
 		
 	}
 	
 	// spawn sphere (x y z) r
 	// (x y z) r
-	static public Sphere CreateSphere(String cmd) {
+	static public Sphere create(String cmd) {
 		String name = cmd.split(" ")[0];
 		cmd = cmd.substring(name.length()+1);
 		Matcher m = regex.matcher(cmd);
@@ -94,6 +99,12 @@ public class Sphere extends Entity {
 	}
 	
 	static public void main(String args[]) {
+		
+	}
+
+	@Override
+	public void applyTransform(Transformation transform) {
+		// TODO Auto-generated method stub
 		
 	}
 

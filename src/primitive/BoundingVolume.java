@@ -1,10 +1,14 @@
 package primitive;
 
-public abstract class BoundingVolume extends Entity {
+import core.ITransformable;
+import core.Ray;
 
-	public BoundingVolume(String name) {
-		super(name);
-		// TODO Auto-generated constructor stub
+public abstract class BoundingVolume implements ITransformable {
+
+	public BoundingVolume() {
+
 	}
-
+	
+	public abstract boolean testIntersect(Ray r);
+	public abstract BoundingVolume clone();
 }

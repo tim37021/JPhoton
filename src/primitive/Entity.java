@@ -3,7 +3,7 @@ package primitive;
 import core.*;
 import material.*;
 
-public abstract class Entity {
+public abstract class Entity implements ITransformable {
 	protected String name;
 	private final int id;
 	private Material material;

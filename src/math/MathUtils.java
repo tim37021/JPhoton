@@ -8,12 +8,18 @@ import core.Ray;
 public class MathUtils {
 	public static final float DIV_1_PI = 1.0f/(float)Math.PI;
 	public static final float MUL_2_PI = 2.0f*(float)Math.PI;
-	public static final float EPSILON = 1e-4f;
+	public static final float DIV_PI_180 = (float)Math.PI/180;
+	public static final float EPSILON = 1e-2f;
 	public static Random rand;
 	
 	static {
 		rand = new Random();
 	};
+
+	public static float clamp(float x, float min, float max) {
+		return (float)Math.min(Math.max(x, min), max);
+	}
+	
 	public static Vector3f clamp(Vector3f v, float min, float max) {
 		float x = Math.min(Math.max(v.x, min), max);
 		float y = Math.min(Math.max(v.y, min), max);
@@ -25,6 +31,18 @@ public class MathUtils {
 		float T = (float)Math.sqrt(1-(1-u)*(1-u));
 	    return new Vector3f((float)(Math.cos(phi)*T), (float)(Math.sin(phi)*T), 1-u);
 	}
+	
+	public static Vector3f cosineWeightedHemisphereSampling(float u, float v) {
+		float cosPhi = (float)Math.cos(MUL_2_PI*u);
+		float sinPhi = (float)Math.sin(MUL_2_PI*u);
+		float cosTheta = (float)Math.sqrt(1-v);
+		float sinTheta = (float)Math.sqrt(1-cosTheta*cosTheta);
+		float pu = sinTheta * cosPhi;
+		float pv = sinTheta * sinPhi;
+		float pw = cosTheta;
+		return new Vector3f(pu, pv, pw);
+	}
+	
 	
 	// TBN * vec
 	public static Vector3f changeBasis(Vector3f T, Vector3f B, Vector3f N, Vector3f vec) {
@@ -41,7 +59,7 @@ public class MathUtils {
         Vector3f N = v0v1.crossProduct(v0v2);
 
         // The ray and plane are parallel or not
-        float almostZero = 0.0f; // TODO: to be set 
+        float almostZero = EPSILON; // TODO: to be set 
         float nDotDir = N.dot(r.dir);
         if(Math.abs(nDotDir) < almostZero)
             return null;
@@ -85,5 +103,9 @@ public class MathUtils {
         // normal vector shold reverse to ray direction
         Vector3f rN = N.dot(r.dir) < 0 ? N : new Vector3f(-N.x ,-N.y, -N.z);
         return new Intersection(t, P, rN.normalized());
+    }
+    
+    public static Matrix4 eularRotation(Vector3f rxyz) {
+    	return Matrix4.rz(rxyz.z).mul(Matrix4.ry(rxyz.y)).mul(Matrix4.rx(rxyz.x));
     }
 }
